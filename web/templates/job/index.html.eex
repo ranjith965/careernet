@@ -1,31 +1,26 @@
-<h2>Listing jobs</h2>
-
-<table class="table">
+<h1>Available Jobs</h1>
+<table>
   <thead>
     <tr>
-      <th>Company</th>
-      <th>Position</th>
-      <th>Description</th>
-      <th>Qualifications</th>
-
-      <th></th>
+      <td>Company</td>
+      <td>Position</td>
+      <td></td>
     </tr>
   </thead>
   <tbody>
-<%= for job <- @jobs do %>
-    <tr>
-      <td><%= job.company %></td>
-      <td><%= job.position %></td>
-      <td><%= job.description %></td>
-      <td><%= job.qualifications %></td>
-
-      <td class="text-right">
-        <span><%= link "Show", to: job_path(@conn, :show, job), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: job_path(@conn, :edit, job), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: job_path(@conn, :delete, job), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-      </td>
-    </tr>
-<% end %>
+    <%= for job <- @jobs do %>
+      <tr>
+        <td>
+          <%= job.company %>
+        </td>
+        <td>
+          <%= job.position %>
+        </td>
+        <td>
+          <span><%= link "Details", to: job_path(@conn, :show, job) %></span>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 
