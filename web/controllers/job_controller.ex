@@ -4,16 +4,28 @@ defmodule Careernet.JobController do
   alias Careernet.Job
 
   def index(conn, _params) do
+    if Careernet.Session.logged_in?(conn) == false do
+      render(conn, "login.html")
+    end
+
     jobs = Repo.all(Job)
     render(conn, "index.html", jobs: jobs)
   end
 
   def new(conn, _params) do
+    if Careernet.Session.logged_in?(conn) == false do
+      render(conn, "login.html")
+    end
+
     changeset = Job.changeset(%Job{})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"job" => job_params}) do
+    if Careernet.Session.logged_in?(conn) == false do
+      render(conn, "login.html")
+    end
+
     changeset = Job.changeset(%Job{}, job_params)
 
     case Repo.insert(changeset) do
@@ -27,17 +39,29 @@ defmodule Careernet.JobController do
   end
 
   def show(conn, %{"id" => id}) do
+    if Careernet.Session.logged_in?(conn) == false do
+      render(conn, "login.html")
+    end
+
     job = Repo.get!(Job, id)
     render(conn, "show.html", job: job)
   end
 
   def edit(conn, %{"id" => id}) do
+    if Careernet.Session.logged_in?(conn) == false do
+      render(conn, "login.html")
+    end
+
     job = Repo.get!(Job, id)
     changeset = Job.changeset(job)
     render(conn, "edit.html", job: job, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "job" => job_params}) do
+    if Careernet.Session.logged_in?(conn) == false do
+      render(conn, "login.html")
+    end
+
     job = Repo.get!(Job, id)
     changeset = Job.changeset(job, job_params)
 
@@ -52,6 +76,10 @@ defmodule Careernet.JobController do
   end
 
   def delete(conn, %{"id" => id}) do
+    if Careernet.Session.logged_in?(conn) == false do
+      render(conn, "login.html")
+    end
+    
     job = Repo.get!(Job, id)
 
     # Here we use delete! (with a bang) because we expect
