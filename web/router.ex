@@ -23,6 +23,8 @@ defmodule Careernet.Router do
     get    "/login",  SessionController, :new
     post   "/login",  SessionController, :create
     delete "/logout", SessionController, :delete
+
+    resources "/jobs", JobController
   end
 
   # Other scopes may use custom stacks.
