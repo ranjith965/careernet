@@ -1,4 +1,6 @@
 defmodule Careernet.Web do
+
+  import Careernet.Session, only: [current_user: 1, logged_in?: 1]
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.

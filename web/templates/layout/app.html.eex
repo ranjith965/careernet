@@ -15,11 +15,16 @@
     <div class="container">
       <header class="header">
         <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
+          <div class="jumbotron">
+            <%= if Careernet.Session.logged_in?(@conn) do %>
+              <h2><li><%= Careernet.Session.current_user(@conn).email %></li><h2>
+              <h2><li><%= link "Logout", to: session_path(@conn, :delete), method: :delete %></li></h2>
+            <% else %>
+              <h2><li><%= link "Login",    to: "/login" %></li></h2>
+              <h2><li><%= link "Register", to: registration_path(@conn, :new) %></li></h2>
+            <% end %>
+          </div>
         </nav>
-        <span class="logo"></span>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
